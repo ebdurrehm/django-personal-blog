@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Yeni postlar</title>
+</head>
+<body>
+{%  for post in posts %}
+<p>
+    <b><a href="{% url 'post_detail' post.id %}">{{post.titles}}</a></b><small>     {{post.create_time}}</small></p>
+    <p>{{ post.content}}
+    <hr>
+</p>
+
+{% endfor %}
+</body>
+</html>
