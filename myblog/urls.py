@@ -16,13 +16,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from blog import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('create/', views.create,name='create'),
+    path('posts/create/', views.create,name='create'),
     path('delete/', views.delete),
-    path('update/',views.delete),
-    path('create/posts/', views.req_det,name='posts'),
+    path('detail/update/<slugfy>',views.update,name='update'),
+    path('posts/', views.req_det,name='posts'),
     path('', views.index),
-    path('detail/(?<pk>[0-9]+)', views.detail,name="post_detail"),
+    path('detail/<slugfy>', views.detail,name="post_detail"),
+    path('try/',views.trying),
+    path('delete/<slugfy>',views.delete,name='delete'),
+
 ]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

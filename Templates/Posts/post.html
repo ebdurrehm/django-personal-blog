@@ -1,17 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Yeni postlar</title>
-</head>
-<body>
+{% extends 'Posts/base.html' %}
+{% block content %}
 {%  for post in posts %}
-<p>
-    <b><a href="{% url 'post_detail' post.id %}">{{post.titles}}</a></b><small>     {{post.create_time}}</small></p>
-    <p>{{ post.content}}
+
+<div class="col-lg-6 offset-md-3"  >
+
+    <p><h2><a href="{% url 'post_detail' post.slugfy %}">{{post.titles}}</a>,<small style="size: 1px;
+    text-align: end;
+    font-size: 14px;
+    padding-left: 15px;
+    color: darkslategrey;">{{post.create_time}}</small></h2></p>
+<br>
+{% if post.get_image_or_none %}
+    <img src="{{ post.get_image_or_none }}" style="width:570px;" class="img-responsive">
+    {% endif %}
+<p>{{post.content}}</p>
+<p>Düzəliş tarixi: {{ post.updated_time|timesince }}</p>
+
+<a class="btn btn-info" href="{% url 'update' post.slugfy %}"><button>Düzəliş et</button></a>
+<a class="btn btn-danger" href="{% url 'delete' post.slugfy %}"><button>Sil</button></a>
     <hr>
-</p>
+</div>
 
 {% endfor %}
-</body>
-</html>
+    {% endblock %}

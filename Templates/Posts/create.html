@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Meqale yaz</title>
-</head>
-<body>
+{% extends 'Posts/base.html' %}
+{% block content %}
 <div style="margin:0px; margin-left:20%; margin-right:40%; background-color: aqua">
 
 {% if field.errors %}
     {{field.errors}}
     {% endif %}
-    <form action="" method="post">
+    <form action="" enctype="multipart/form-data" method="post">
          {% csrf_token %}
         <h2>Form yarat</h2>
 
@@ -24,5 +19,4 @@
         <input type="submit">
     </form>
 </div>
-</body>
-</html>
+{% endblock %}
